@@ -124,22 +124,22 @@ class myHandler(BaseHTTPRequestHandler):
                             self.wfile.write(("<li>Grams of CO2: " +str(co2Grams)+"g</li>").encode())
 
 
-                            distance = geoloc.getDistance(item.manufacturer,  userLat, userLng) 
+                            distance = geoloc.getDistance(item.manufacturer,  userLat, userLng)
                             self.wfile.write(("<li>Distance from origin: " +str(distance)+"km</li>").encode())
-                            
+
 
                             if co2Grams > 20:
                                 self.wfile.write(("<li>Your food choice produces a very high amount of CO2 emissions</li>").encode())
-                            else if co2Grams > 10 and co2Grams <= 20:
+                            elif co2Grams > 10 and co2Grams <= 20:
                                 self.wfile.write(("<li>Your food choice produces a moderate amount of CO2 emissions</li>").encode())
                                 self.wfile.write(("<li>Not bad, but you could do better!</li>").encode())
-                            else if co2Grams <= 10:
+                            elif co2Grams <= 10:
                                 self.wfile.write(("<li>Your food choice produces a low amount of CO2 emissions</li>").encode())
                                 self.wfile.write(("<li>Well done, you're saving the planet!!</li>").encode())
-                                
 
 
-                            self.wfile.write("</div></body></html>".encode())   
+
+                            self.wfile.write("</div></body></html>".encode())
 
             if not hasResult:
                 self.send_response(200)
