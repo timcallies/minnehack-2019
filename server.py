@@ -11,7 +11,7 @@ print "UPC is %s\n" %  UPC
 def createRequest( upc ):
     url = "https://api.barcodelookup.com/v2/products"
     parameters = {"barcode": upc, "key": APIkey } 
-    return requests.get("https://api.barcodelookup.com/v2/products", params=parameters, timeout = 5)
+    return requests.get(url, params=parameters, timeout = 5)
     
 
 
