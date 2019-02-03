@@ -4,6 +4,7 @@
 
 from http.server import BaseHTTPRequestHandler,HTTPServer
 from os import curdir, sep
+import os
 import cgi
 import numpy
 import zbar
@@ -12,7 +13,11 @@ import base64
 from PIL import Image
 import imageio
 
-PORT = 8080
+port = os.environ.get('PORT')
+if (port==None):
+    port=3000
+else:
+    port = int(port)
 
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
@@ -21,6 +26,7 @@ def change_contrast(img, level):
     return img.point(contrast)
 
 class myHandler(BaseHTTPRequestHandler):
+
     def do_GET(self):
         if self.path=="/":
             self.path="html/home.html"
@@ -29,6 +35,9 @@ class myHandler(BaseHTTPRequestHandler):
             sendReply=False
             if self.path.endswith(".html"):
                 mimetype='text/html'
+                sendReply=True
+            if self.path.endswith(".css"):
+                mimetype='text/css'
                 sendReply=True
             if self.path.endswith(".js"):
                 mimetype='application/javascript'
@@ -85,8 +94,8 @@ class myHandler(BaseHTTPRequestHandler):
 
 try:
     #Create a server
-    server = HTTPServer(('',PORT),myHandler)
-    print ('Server open on port ', PORT)
+    server = HTTPServer(('',port),myHandler)
+    print ('Server open on port ', port)
 
     server.serve_forever()
 

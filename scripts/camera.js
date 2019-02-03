@@ -15,6 +15,10 @@ function captureImage() {
     document.getElementById("imageForm").submit();
 }
 
+setTimeout(function() {
+    $("div#scan").fadeOut();
+},3000);
+
 if (hasGetUserMedia())
 {
     const constraints = {
@@ -24,7 +28,10 @@ if (hasGetUserMedia())
     const video = document.querySelector('video');
 
     navigator.mediaDevices.getUserMedia(constraints).
-      then((stream) => {video.srcObject = stream});
+      then((stream) => {
+          video.srcObject = stream
+          $('video').fadeIn();
+      });
 }
 
 else
