@@ -88,6 +88,7 @@ def getDistance( mfName, userLat, userLng ):
         
         print("Converting the addresses to geolocations....")
         #convert addresses to geocode
+        geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.iteritems() ))
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.items() ))
 
         #save the geocode  
@@ -103,6 +104,8 @@ def getDistance( mfName, userLat, userLng ):
     return calcDistance( userLat, userLng, origin[0], origin[1] ) 
 
 
+#distance = getDistance( "dole", (44.9537, 93.0900) )
+#print "Distance from Dole is: %dkm" % distance
 #distance = getDistance( "dole", 44.9537, 93.0900 )
 #print("Distance from Dole is: %dkm" % distance)
 
