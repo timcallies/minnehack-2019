@@ -2,7 +2,7 @@ import sys
 import requests 
 import string
 
-APIkey = "jcgx5oyxczp630vm6vu9isb7vfar3z"
+APIkey = "eri3nucrv4m3sv50imvc9yyfy40h53"
 
 UPC = sys.argv[1] 
 
@@ -30,12 +30,12 @@ class produceItem:
         if len( self.nutrition ) != 0:
             print "\tNutrition:"
             for x in range( len(self.nutrition) ):
-                print "\n\t\t %s" % self.nutrition[x] 
+                print "\t\t %s" % self.nutrition[x] 
         
         if len(self.ingrediants) != 0: 
-                print "\n\tIngrediants:"
+                print "\tIngrediants:"
                 for x in range( len(self.ingrediants) ):
-                    print "\n\t\t %s" % self.ingrediants[x]
+                    print "\t\t %s" % self.ingrediants[x]
 
 
 
@@ -70,7 +70,7 @@ if product["nutrition_facts"] != "":
     item.addNutrition( product["nutrition_facts"] )
 
 if product["ingredients"] != "": 
-    item.addIngrediants( product["ingrediants"] )
+    item.addIngrediants( product["ingredients"] )
 
 item.toString()
 
