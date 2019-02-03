@@ -80,14 +80,8 @@ class myHandler(BaseHTTPRequestHandler):
                 image = zbar.misc.rgb2gray(image)
             scanner = zbar.Scanner()
             results = scanner.scan(image)
-            if(len(results)==0):
-                self.send_response(200)
-                self.send_header('Location','/')
-                f = open(curdir + sep + 'html/home.html', 'rb')
-                self.end_headers()
-                self.wfile.write(f.read())
-                f.close()
-            else:
+            hasResult = False
+            if(len(results)>0):
                 for result in results:
                     if(result.type=="UPC-A"):
 
@@ -97,15 +91,23 @@ class myHandler(BaseHTTPRequestHandler):
                         #get the details about this UPC
                         UPC = int(UPCstr)
                         item = upcReader.newProduce(UPC)
-                        item.toString()
+                        if item != -1:
+                            hasResult=True
+                            item.toString()
+                            userLat = form['latitude'].value
+                            userLng = form['longitude'].value
+                            distance = geoloc.getDistance(item.manufacturer, userLat, userLng)
+                            if(distance>0):
+                                print (distance)
 
-                        userLat = form['latitude'].value
 
-                        userLng = form['longitude'].value
-
-                        distance = geoloc.getDistance(item.manufacturer, userLat, userLng)
-                        if(distance>0):
-                            print (distance)
+            if not hasResult:
+                self.send_response(200)
+                self.send_header('Location','/')
+                f = open(curdir + sep + 'html/home.html', 'rb')
+                self.end_headers()
+                self.wfile.write(f.read())
+                f.close()
 
 
 try:
