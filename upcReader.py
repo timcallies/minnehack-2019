@@ -1,6 +1,6 @@
 import requests
 
-APIkey = "3tg1gkl1v84sc51ub7yinnx7iozrk3"
+APIkey = "989fpvzltu4cr4406tjrlbpplr99mf"
 
 
 '''
@@ -39,7 +39,7 @@ class produceItem:
         self.ingrediants = ingrediants.lower().split(", ")
 
     def addWeight(self, weight):
-        self.weight = 10
+        self.weight = float(weight)
 
     def toString(self):
         print ("Name: {}\n\t UPC: {}\n\t Brand: {} \n\t Manufacturer: {}\n".format(self.name, self.upc, self.brand, self.manufacturer) )
