@@ -47,6 +47,6 @@ h1{
 li {
     font-size: 2em;
     list-style: none;
-    font-family: cursive;
+    font-family: monospace;
     margin: 20px;
 }
