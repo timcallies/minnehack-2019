@@ -113,6 +113,7 @@ class myHandler(BaseHTTPRequestHandler):
                             distance = geoloc.getDistance(item.manufacturer, userLat, userLng)
                             if(distance>0):
                                 print (distance)
+                                co2Grams = 115*distance
 
 
             if not hasResult:

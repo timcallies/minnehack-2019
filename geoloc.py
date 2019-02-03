@@ -97,7 +97,7 @@ def getDistance( mfName, userLat, userLng ):
     #actually just get the first item in the list
     origin = manufacturers[mfName][0]
     
-    return calcDistance( userLat, userLng, origin[0], origin[1] ) 
+    return abs(calcDistance( userLat, userLng, origin[0], origin[1] ) )
 
 
 #distance = getDistance( "dole", 44.9537, 93.0900 )
