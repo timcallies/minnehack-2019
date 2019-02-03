@@ -98,9 +98,10 @@ class myHandler(BaseHTTPRequestHandler):
                             self.send_response(200)
                             self.send_header('Content-type','text/html')
                             self.end_headers()
-                            self.wfile.write("<html><header><title>Hopefully Working</title></header><style>@import url('/style.css');</style><body><div id='main'>".encode())
+
+                            self.wfile.write("<html><header><title>Hopefully Working</title></header><link href='https://fonts.googleapis.com/css?family=Staatliches' rel='stylesheet'><style>@import url('/style.css');</style><body><div id='main'>".encode())
                             if(item.name!=""):
-                                self.wfile.write(("<li>"+item.name+"</li>").encode())
+                                self.wfile.write(("<h1>"+item.name+"</h1>").encode())
                             if(item.upc!=""):
                                 self.wfile.write(("<li>UPC: "+item.upc+"</li>").encode())
                             if(item.brand!=""):
@@ -114,7 +115,7 @@ class myHandler(BaseHTTPRequestHandler):
                             co2Grams = geoloc.c02calc( item.manufacturer, item.weight, userLat, userLng)  
                             self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
                             self.wfile.write("</div></body></html>".encode())
-                            
+
 
             if not hasResult:
                 self.send_response(200)
