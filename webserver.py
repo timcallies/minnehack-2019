@@ -95,17 +95,10 @@ class myHandler(BaseHTTPRequestHandler):
                         UPCstr = result.data 
                         
                         #get the details about this UPC 
-                        if(UPCstr.isnumeric()): 
-                            UPC = int(UPCstr) 
-                            item = upcReader.newProduce(UPC)
+                        UPC = int(UPCstr) 
+                        item = upcReader.newProduce(UPC)
 
-
-                            #distance = geoloc.getDistance(item.manufacturer, (userLat, userLng)
-
-                        else: 
-                            print("Was not able to read in barcode correctly. %s") % UPCstr
-                            exit(1)
-
+                        #distance = geoloc.getDistance(item.manufacturer, (userLat, userLng)
 
 
 try:
