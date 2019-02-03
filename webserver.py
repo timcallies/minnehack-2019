@@ -92,7 +92,7 @@ class myHandler(BaseHTTPRequestHandler):
                     if(result.type=="UPC-A"):
                      
                         print(result.data)
-                        UPCstr = str(result.data)[2:len(result.data)-1]
+                        UPCstr = result.data 
                         
                         #get the details about this UPC 
                         if(UPCstr.isnumeric()): 
