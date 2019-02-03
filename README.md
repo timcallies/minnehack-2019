@@ -15,5 +15,7 @@ We devoloped a program that allows consusmers to scan UPC barcodes to get some i
 2. We needed to adjust the image so that we could get an accurate reading from the barcode image. Although more could be done in this regard
 3. After we had the UPC number, we could then hit the barcode lookup API to give us info about who the manufactor is, what the ingrediants are, and the nutritiional facts for the product.  
 4. Once we had that information, we got GPS coords from the user, and GPS coords for where the product came from. So that we could calculate the distance between the two. 
-5. Once we had the distance between the two we could estimate the amount of C02 that was created in order to ship the product. 
-6. Since we also had the user's location we could recomend a local farm for the user to get that kind of product from. 
+5. We used the google platform geocoding API to translate human readable addresses into GPS coordinates to calculate the distance between the user and the origin of the produce. 
+6. Once we had the distance between the two we could estimate the amount of C02 that was created in order to ship the product. 
+7. Since we also had the user's location we could recomend a local farm for the user to get that kind of product from. 
+
