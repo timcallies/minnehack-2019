@@ -100,8 +100,19 @@ def getDistance( mfName, userLat, userLng ):
     return abs(calcDistance( userLat, userLng, origin[0], origin[1] ) )
 
 
-#distance = getDistance( "dole", 44.9537, 93.0900 )
-#print("Distance from Dole is: %dkm" % distance)
+def calcco2( mfName, weight, userLat, userLng ):
+    #default to a small item of 10 grams if no weight is provided.
+    if weight = 0: 
+        weight = 10
+
+
+    distance = getDistance( mfName, userLat, userLng)
+
+    #plane average emissions per metric ton per km Source Lufthansa Air cargo 
+    airEmmision = 500 # 500g/ton/km
+    gramsPerTon = 907185
+
+    emmisions = airEmmision /  weight 
 
 
 
