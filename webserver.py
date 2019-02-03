@@ -16,6 +16,8 @@ import imageio
 port = os.environ.get('PORT')
 if (port==None):
     port=3000
+else:
+    port = int(port)
 
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
