@@ -101,12 +101,11 @@ class myHandler(BaseHTTPRequestHandler):
                             if(item.name!=""):
                                 self.wfile.write(("<li>"+item.name+"</li>").encode())
                             if(item.upc!=""):
-                                self.wfile.write(("<li>"+item.upc+"</li>").encode())
+                                self.wfile.write(("<li>UPC: "+item.upc+"</li>").encode())
                             if(item.brand!=""):
-                                self.wfile.write(("<li>"+item.brand+"</li>").encode())
+                                self.wfile.write(("<li>Brand: "+item.brand+"</li>").encode())
                             if(item.manufacturer!=""):
-                                self.wfile.write(("<li>"+item.manufacturer+"</li>").encode())
-                            self.wfile.write("</div></body></html>".encode())
+                                self.wfile.write(("<li>Manufacturer: "+item.manufacturer+"</li>").encode())
 
                             userLat = form['latitude'].value
                             userLng = form['longitude'].value
@@ -114,7 +113,9 @@ class myHandler(BaseHTTPRequestHandler):
                             if(distance>0):
                                 print (distance)
                                 co2Grams = 115*distance
-
+                                self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
+                            self.wfile.write("</div></body></html>".encode())
+                            
 
             if not hasResult:
                 self.send_response(200)

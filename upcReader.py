@@ -1,18 +1,18 @@
-import requests 
+import requests
 
-APIkey = "eri3nucrv4m3sv50imvc9yyfy40h53"
+APIkey = "3tg1gkl1v84sc51ub7yinnx7iozrk3"
 
 
 '''
-=== FORMAT OF PRODUCE ITEM ===  
-    name    <- Name of the product  
-    upc     <- UPC number 
-    brand   <- Brand name 
+=== FORMAT OF PRODUCE ITEM ===
+    name    <- Name of the product
+    upc     <- UPC number
+    brand   <- Brand name
     manufacturer <- Name of the manufacturer
 
-    optional 
+    optional
     ingrediants   <- a list of ingrediants in the product
-    nutrition <- name of the manufacturer 
+    nutrition <- name of the manufacturer
 
 
     All strings are lowercase
@@ -25,16 +25,16 @@ class produceItem:
         self.upc = upc.lower()
         self.brand = brand.lower()
         self.manufacturer = manufacturer.lower()
-        
-        #possible null values 
+
+        #possible null values
         self.nutrition = []
-        self.ingrediants = [] 
+        self.ingrediants = []
 
     def addNutrition( self, nutrition ):
-        #do any necassary string formating 
+        #do any necassary string formating
         nutrition = nutrition.lower().split(", ")
 
-    def addIngrediants( self, ingrediants ): 
+    def addIngrediants( self, ingrediants ):
         self.ingrediants = ingrediants.lower().split(", ")
 
     def toString(self):
@@ -43,20 +43,20 @@ class produceItem:
             print ("\tNutrition:")
             for x in range( len(self.nutrition) ):
                 print ("\t\t %s" % self.nutrition[x] )
-        
-        if len(self.ingrediants) != 0: 
+
+        if len(self.ingrediants) != 0:
                 print ("\tIngrediants:")
                 for x in range( len(self.ingrediants) ):
                     print ("\t\t %s" % self.ingrediants[x])
 
 
 
-#function that takes the UPC code and returns the result of the request. 
+#function that takes the UPC code and returns the result of the request.
 def createRequest( upc ):
     url = "https://api.barcodelookup.com/v2/products"
-    parameters = {"barcode": upc, "key": APIkey } 
+    parameters = {"barcode": upc, "key": APIkey }
     return requests.get(url, params=parameters, timeout = 5)
-    
+
 
 
 def newProduce( UPC ):
@@ -64,10 +64,10 @@ def newProduce( UPC ):
     #send out the request to the UPC API
     response = createRequest( UPC )
 
-    # Error check JSON 
+    # Error check JSON
     try:
         json = response.json()
-        if response.status_code != 200: 
+        if response.status_code != 200:
             print ("Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC))
             return -1
 
@@ -77,12 +77,12 @@ def newProduce( UPC ):
 
     product = json["products"][0]
     item = produceItem( product["product_name"], product["barcode_number"], product["brand"], product["manufacturer"])
-    
-    
-    if product["nutrition_facts"] != "": 
+
+
+    if product["nutrition_facts"] != "":
         item.addNutrition( product["nutrition_facts"] )
 
-    if product["ingredients"] != "": 
+    if product["ingredients"] != "":
         item.addIngrediants( product["ingredients"] )
 
     return item
