@@ -43,3 +43,10 @@ h1{
     font-family: 'Staatliches', cursive;
     font-size: 3em;
 }
+
+li {
+    font-size: 2em;
+    list-style: none;
+    font-family: cursive;
+    margin: 20px;
+}
