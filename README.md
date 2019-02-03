@@ -1,8 +1,11 @@
-#TEAM BIG BRAIN 
-##SUSTAINABLITIY SCANNER
-###TABLE 41
-####Tyler Beverley, Tim Callies, Andrew Bates
-
+# TEAM BIG BRAIN 
+  
+## SUSTAINABLITIY SCANNER
+  
+### TABLE 41
+  
+#### Tyler Beverley, Tim Callies, Andrew Bates
+  
 
 We devoloped a program that allows consusmers to scan UPC barcodes to get some information about that product, such as where that product is from, where the product can be found locally nearby, and how much C02 was created durring the shipping of this product. We hope this product will help promote sustainable argicltural practices (such as growing locally to avoid creating C02 durring shipping), and we hope that this product will strengthen local argicultural communites. 
 
