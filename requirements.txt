@@ -3,5 +3,5 @@ imageio
 pillow
 pip
 requests
-geopy.distance
+geopy
 pickle
