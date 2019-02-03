@@ -3,6 +3,7 @@
 #pip install pillow
 
 from http.server import BaseHTTPRequestHandler,HTTPServer
+from os import curdir, sep
 import os
 import cgi
 import numpy
