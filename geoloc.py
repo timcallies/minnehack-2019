@@ -3,7 +3,7 @@ import requests
 import os 
 import pickle 
 
-
+#for google cloud platform 
 APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 
 manufacturers = { 'arizona' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
@@ -63,10 +63,13 @@ def printDictionary( dictonary ):
 #print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301) 
                      
 
-
-
 # mf = manufacturer name
 def getDistance( mfName, (userLat, userLng) ):
+
+    #HTML5 will default to 0,0 if the user declines. 
+    if userLat == 0 and userLng == 0:
+        print "User did not provide their location" 
+        exit(1)
 
     #if the addresses file already exitst then open for appending
     #otherwise create the file and write the addresses. 
@@ -96,8 +99,8 @@ def getDistance( mfName, (userLat, userLng) ):
     return calcDistance( userLat, userLng, origin[0], origin[1] ) 
 
 
-distance = getDistance( "dole", (44.9537, 93.0900) )
-print "Distance from Dole is: %dkm" % distance
+#distance = getDistance( "dole", (44.9537, 93.0900) )
+#print "Distance from Dole is: %dkm" % distance
 
 
 
