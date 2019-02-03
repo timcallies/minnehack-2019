@@ -69,11 +69,11 @@ def newProduce( UPC ):
         json = response.json()
         if response.status_code != 200: 
             print ("Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC))
-            exit(1) 
+            return -1
 
     except ValueError:
         print ("Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC))
-        exit(1) 
+        return -1
 
     product = json["products"][0]
     item = produceItem( product["product_name"], product["barcode_number"], product["brand"], product["manufacturer"])
