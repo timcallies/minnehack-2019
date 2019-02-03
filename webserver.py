@@ -100,7 +100,7 @@ class myHandler(BaseHTTPRequestHandler):
                             self.send_header('Content-type','text/html')
                             self.end_headers()
 
-                            self.wfile.write("<html><header><title>Hopefully Working</title></header><link href='https://fonts.googleapis.com/css?family=Staatliches' rel='stylesheet'><style>@import url('/style.css');</style><body><div id='main'>".encode())
+                            self.wfile.write("<html><header><title>Sustainability Scanner</title></header><link href='https://fonts.googleapis.com/css?family=Staatliches' rel='stylesheet'><style>@import url('/style.css');</style><body><div id='main'>".encode())
                             if(item.name!=""):
                                 self.wfile.write(("<h1>"+item.name+"</h1>").encode())
                             if(item.upc!=""):
