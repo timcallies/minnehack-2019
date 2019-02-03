@@ -12,6 +12,8 @@ import zbar.misc
 import base64
 from PIL import Image
 import imageio
+import upcReader 
+import geoloc
 
 port = os.environ.get('PORT')
 if (port==None):
@@ -88,8 +90,16 @@ class myHandler(BaseHTTPRequestHandler):
             else:
                 for result in results:
                     if(result.type=="UPC-A"):
-                        print(str(result.data)[2:len(result.data)-1])
+                     
+                        print(result.data)
+                        UPCstr = result.data 
+                        
+                        #get the details about this UPC 
+                        UPC = int(UPCstr) 
+                        item = upcReader.newProduce(UPC)
+                        item.toString()
 
+                        #distance = geoloc.getDistance(item.manufacturer, (userLat, userLng)
 
 
 try:

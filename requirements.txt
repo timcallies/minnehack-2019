@@ -2,3 +2,5 @@ zbar-py
 imageio
 pillow
 pip
+requests
+geopy
