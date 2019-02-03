@@ -7,8 +7,6 @@ import pickle
 APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 
 
-
-
 def calcDistance( lat1, lon1, lat2, lon2):
     coords_1 = (lat1, lon1)
     coords_2 = (lat2, lon2)
@@ -67,7 +65,11 @@ def getDistance( mfName, userLat, userLng ):
     manufacturers = { 'Ferolito Vultaggio & Sons' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
             "driscoll's" : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
             'dole' : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
-            'hunts' : ['554+S+Yosemite+Ave,+Oakdale,+CA+95361'],
+            "hunt's" : ['554+S+Yosemite+Ave,+Oakdale,+CA+95361'],
+            'green giant' : ['1126+Green+Giant+Ln,+Blue+Earth,+MN+56013'],
+            'bush brothers & company' : ['600+Bush+Brothers+Drive,+Augusta,+WI+54722', '3304+Chestnut+Hill+Rd,+Dandridge,+TN+37725'],
+            'idahoan foods' : ['529+N+3500+E,+Lewisville,+ID+83431'],
+            'tyson' : ['6600+US-431,+Albertville,+AL+35950', '67240+Main+St,+Blountsville,+AL+35031', '110+W+Freeman+Ave,+Berryville,+AR+72616', '1001+E+Stoddard+St,+Dexter,+MO+63841', '403+S+Custer+Ave,+New+Holland,+PA+17557']
 
             }
 
@@ -111,9 +113,9 @@ def getDistance( mfName, userLat, userLng ):
 
 
 def c02calc( mfName, weight, userLat, userLng ):
-    #default to a small item of 10 grams if no weight is provided.
+    #default to a small item of 30 grams ~1 oz if no weight is provided.
     if weight == 0:
-        weight = 10
+        weight = 30 
 
     distance = getDistance( mfName, userLat, userLng)
 
