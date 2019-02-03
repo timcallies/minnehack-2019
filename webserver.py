@@ -99,7 +99,7 @@ class myHandler(BaseHTTPRequestHandler):
                         item = upcReader.newProduce(UPC)
                         item.toString()
 
-                        #distance = geoloc.getDistance(item.manufacturer, (userLat, userLng)
+                        #distance = geoloc.getDistance(item.manufacturer, userLat, userLng)
 
 
 try:
