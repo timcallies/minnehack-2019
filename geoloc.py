@@ -100,8 +100,20 @@ def getDistance( mfName, userLat, userLng ):
     return abs(calcDistance( userLat, userLng, origin[0], origin[1] ) )
 
 
-#distance = getDistance( "dole", 44.9537, 93.0900 )
-#print("Distance from Dole is: %dkm" % distance)
+def c02calc( mfName, weight, userLat, userLng ):
+    #default to a small item of 10 grams if no weight is provided.
+    if weight = 0: 
+        weight = 10
+
+
+    distance = getDistance( mfName, userLat, userLng)
+
+    #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo 
+    airEmmision = 500 # 500g * weight in tons * km
+    gramsPerTon = 907185
+
+    emmisions = airEmmision * ( weight / gramsPerTon ) * distance 
+    return emmisions # returns the total amount of co2 in grams 
 
 
 
