@@ -6,10 +6,9 @@ import pickle
 #for google cloud platform 
 APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 
-manufacturers = { "Ferolito Vultaggio & Sons" : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
-                "driscoll's" : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
-                "dole" : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
-                  }
+
+
+
 
 
 
@@ -66,6 +65,11 @@ def printDictionary( dictonary ):
 # mf = manufacturer name
 def getDistance( mfName, userLat, userLng ):
 
+    manufacturers = { 'arizona' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
+            'driscolls' : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
+            'dole' : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
+            }
+
     #HTML5 will default to 0,0 if the user declines. 
     if userLat == 0 and userLng == 0:
         print("User did not provide their location" )
@@ -85,6 +89,7 @@ def getDistance( mfName, userLat, userLng ):
         print("Converting the addresses to geolocations....")
         #convert addresses to geocode
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.iteritems() ))
+        geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.items() ))
 
         #save the geocode  
         pickle.dump( geolocations, addresses)
@@ -101,6 +106,8 @@ def getDistance( mfName, userLat, userLng ):
 
 #distance = getDistance( "dole", (44.9537, 93.0900) )
 #print "Distance from Dole is: %dkm" % distance
+#distance = getDistance( "dole", 44.9537, 93.0900 )
+#print("Distance from Dole is: %dkm" % distance)
 
 
 
