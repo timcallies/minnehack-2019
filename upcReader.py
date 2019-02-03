@@ -13,8 +13,8 @@ APIkey = "eri3nucrv4m3sv50imvc9yyfy40h53"
     manufacturer <- Name of the manufacturer
 
     optional 
-    ingrediants <- a list of ingrediants in the product
-    manufacturer <- name of the manufacturer 
+    ingrediants   <- a list of ingrediants in the product
+    nutrition <- name of the manufacturer 
 
 
     All strings are lowercase
@@ -40,16 +40,16 @@ class produceItem:
         self.ingrediants = ingrediants.lower().split(", ")
 
     def toString(self):
-        print "Name: %s\n\t UPC: %s\n\t Brand: %s \n\t Manufacturer: %s\n" % (self.name, self.upc, self.brand, self.manufacturer)
+        print ("Name: {}\n\t UPC: {}\n\t Brand: {} \n\t Manufacturer: {}\n".format(self.name, self.upc, self.brand, self.manufacturer) )
         if len( self.nutrition ) != 0:
-            print "\tNutrition:"
+            print ("\tNutrition:")
             for x in range( len(self.nutrition) ):
-                print "\t\t %s" % self.nutrition[x] 
+                print ("\t\t %s" % self.nutrition[x] )
         
         if len(self.ingrediants) != 0: 
-                print "\tIngrediants:"
+                print ("\tIngrediants:")
                 for x in range( len(self.ingrediants) ):
-                    print "\t\t %s" % self.ingrediants[x]
+                    print ("\t\t %s" % self.ingrediants[x])
 
 
 
@@ -70,11 +70,11 @@ def newProduce( UPC ):
     try:
         json = response.json()
         if response.status_code != 200: 
-            print "Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC)
+            print ("Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC))
             exit(1) 
 
     except ValueError:
-        print "Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC)
+        print ("Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC))
         exit(1) 
 
     product = json["products"][0]

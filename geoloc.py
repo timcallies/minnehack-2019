@@ -27,12 +27,12 @@ def geocode( addressStr):
     try: 
         json = response.json() 
         if response.status_code != 200:
-            print "Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC)
+            print("Was not able to parse json object from API response. Response code = {}. UPC is {}".format(response.status_code, UPC))
             exit(1) 
         else:
             return json  
     except ValueError: 
-        print "Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC)
+        print("Was not able to parse json object from API response. Response code = {} UPC = {}".format(response.status_code, UPC))
         exit(1) 
 
 
@@ -41,7 +41,7 @@ def geocode( addressStr):
 def addressToGeo( lstOfAddresses ):
     result = []
     for x in lstOfAddresses:
-        print "Address is %s" % x
+        print( "Address is {}".format(x))
 
         #get the lat and long from the json 
         response = geocode(x)
@@ -54,9 +54,9 @@ def addressToGeo( lstOfAddresses ):
 
 def printDictionary( dictonary ):
     for k,v in dictonary.items():
-        print "Key: %s" % k  
+        print("Key: %s" .format(k) )
         for item in v:
-            print item
+            print(item)
 
  
 # st. paul = 44.9537 93.0900
@@ -64,11 +64,11 @@ def printDictionary( dictonary ):
                      
 
 # mf = manufacturer name
-def getDistance( mfName, (userLat, userLng) ):
+def getDistance( mfName, userLat, userLng ):
 
     #HTML5 will default to 0,0 if the user declines. 
     if userLat == 0 and userLng == 0:
-        print "User did not provide their location" 
+        print("User did not provide their location" )
         exit(1)
 
     #if the addresses file already exitst then open for appending
@@ -82,7 +82,7 @@ def getDistance( mfName, (userLat, userLng) ):
     else:
         addresses = open( "./addresses.pickle", "wb") 
         
-        print "Converting the addresses to geolocations...."
+        print("Converting the addresses to geolocations....")
         #convert addresses to geocode
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.iteritems() ))
 
