@@ -97,6 +97,7 @@ class myHandler(BaseHTTPRequestHandler):
                         #get the details about this UPC 
                         UPC = int(UPCstr) 
                         item = upcReader.newProduce(UPC)
+                        item.toString()
 
                         #distance = geoloc.getDistance(item.manufacturer, (userLat, userLng)
 
