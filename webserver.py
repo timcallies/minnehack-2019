@@ -7,6 +7,7 @@ from os import curdir, sep
 import os
 import cgi
 import numpy
+import math
 import zbar
 import zbar.misc
 import base64
@@ -109,13 +110,8 @@ class myHandler(BaseHTTPRequestHandler):
 
                             userLat = form['latitude'].value
                             userLng = form['longitude'].value
-                           
-                           if item.weight == "":
-                                weight = 0
-                            else:
-                                weight = item.weight
                             
-                            co2Grams = geoloc.c02calc( item.manufacturer, weight, userLat, userLng)  
+                            co2Grams = geoloc.c02calc( item.manufacturer, item.weight, userLat, userLng)  
                             self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
                             self.wfile.write("</div></body></html>".encode())
                             

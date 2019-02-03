@@ -57,7 +57,9 @@ def printDictionary( dictonary ):
  
 # st. paul = 44.9537 93.0900
 #print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301) 
-                     
+
+
+
 
 # mf = manufacturer name
 def getDistance( mfName, userLat, userLng ):
@@ -77,14 +79,20 @@ def getDistance( mfName, userLat, userLng ):
     if( os.path.isfile( "./addresses.pickle" ) ):
         addresses = open( "./addresses.pickle", "rb")
 
-        #load the dict of gpucords
-        manufacturers = pickle.load( addresses ) 
+        try: 
+            #load the dict of gpucords
+            manufacturers = pickle.load( addresses )
+        except EOFError: 
+            os.remove("addresses.pickle")
+            print("was not able to load file of locations. Run the server again to regenerate")
+            addresses.close() 
+            exit(1)
+        
         addresses.close()
     else:
         addresses = open( "./addresses.pickle", "wb") 
         
         print("Converting the addresses to geolocations....")
-        #convert addresses to geocode
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.items() ))
 
         #save the geocode  
@@ -102,18 +110,17 @@ def getDistance( mfName, userLat, userLng ):
 
 def c02calc( mfName, weight, userLat, userLng ):
     #default to a small item of 10 grams if no weight is provided.
-    if weight = 0: 
+    if weight == 0:
         weight = 10
-
 
     distance = getDistance( mfName, userLat, userLng)
 
     #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo 
-    airEmmision = 500 # 500g * weight in tons * km
+    airEmision = 500 # 500g * weight in tons * km
     gramsPerTon = 907185
 
-    emmisions = airEmmision * ( weight / gramsPerTon ) * distance 
-    return emmisions # returns the total amount of co2 in grams 
+    emisions = airEmision * ( weight / gramsPerTon ) * distance 
+    return emisions # returns the total amount of co2 in grams 
 
 
 
