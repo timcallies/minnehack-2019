@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import geopy.distance 
 import requests 
 
@@ -7,7 +8,6 @@ APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 def calcDistance( lat1, lon1, lat2, lon2):
     coords_1 = (lat1, lon1)
     coords_2 = (lat2, lon2)
-
     return geopy.distance.vincenty(coords_1, coords_2).miles
 
 def geocode( addressStr):
@@ -16,10 +16,9 @@ def geocode( addressStr):
     return requests.get(url, params=parameters, timeout = 5) 
 
 
-
-manufacturers = { 'arizona' : ['Woodbury, NY'],
-                  'driscolls' : ['Santa Maria, CA', 'Dover, FL'],
-                  'dole' : ['Wahiawa, HI', 'San Jose, Costa Rice', 'Medellin, Colombia'],
+manufacturers = { 'arizona' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
+                  'driscolls' : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
+                  'dole' : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
                   'hunts' : ['Oakdale, CA'],
                   'green giant' : ['Minnesota', 'Idaho', 'Wisconsin', 'New York', 'Peru'],
                   'bush brothers & company' : ['Augusta, WI', 'Chestnut Hill, TN'],
@@ -30,4 +29,3 @@ manufacturers = { 'arizona' : ['Woodbury, NY'],
 # st. paul = 44.9537 93.0900
 print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301) 
                         
-
