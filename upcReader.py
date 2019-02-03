@@ -4,7 +4,22 @@ import string
 
 APIkey = "eri3nucrv4m3sv50imvc9yyfy40h53"
 
-UPC = sys.argv[1] 
+
+'''
+=== FORMAT OF PRODUCE ITEM ===  
+    name    <- Name of the product  
+    upc     <- UPC number 
+    brand   <- Brand name 
+    manufacturer <- Name of the manufacturer
+
+    optional 
+    ingrediants <- a list of ingrediants in the product
+    manufacturer <- name of the manufacturer 
+
+
+    All strings are lowercase
+
+'''
 
 class produceItem:
     def __init__(self, name, upc, brand, manufacturer):
@@ -19,8 +34,7 @@ class produceItem:
 
     def addNutrition( self, nutrition ):
         #do any necassary string formating 
-        nutrition = nutrition.lower()
-        self.nutrition = nutrition.split(", ")
+        nutrition = nutrition.lower().split(", ")
 
     def addIngrediants( self, ingrediants ): 
         self.ingrediants = ingrediants.lower().split(", ")
@@ -39,7 +53,6 @@ class produceItem:
 
 
 
-
 #function that takes the UPC code and returns the result of the request. 
 def createRequest( upc ):
     url = "https://api.barcodelookup.com/v2/products"
@@ -47,31 +60,31 @@ def createRequest( upc ):
     return requests.get(url, params=parameters, timeout = 5)
     
 
-response = createRequest( UPC )
 
-# Error check JSON 
-try:
-    json = response.json()
-    if response.status_code != 200: 
-        print "Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC)
+def newProduce( UPC ):
+
+    #send out the request to the UPC API
+    response = createRequest( UPC )
+
+    # Error check JSON 
+    try:
+        json = response.json()
+        if response.status_code != 200: 
+            print "Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC)
+            exit(1) 
+
+    except ValueError:
+        print "Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC)
         exit(1) 
 
-except ValueError:
-    print "Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC)
-    exit(1) 
+    product = json["products"][0]
+    item = produceItem( product["product_name"], product["barcode_number"], product["brand"], product["manufacturer"])
+    
+    
+    if product["nutrition_facts"] != "": 
+        item.addNutrition( product["nutrition_facts"] )
 
+    if product["ingredients"] != "": 
+        item.addIngrediants( product["ingredients"] )
 
-#print "response is %s\n" % json
-
-
-product = json["products"][0]
-item = produceItem( product["product_name"], product["barcode_number"], product["brand"], product["manufacturer"])
-if product["nutrition_facts"] != "": 
-    item.addNutrition( product["nutrition_facts"] )
-
-if product["ingredients"] != "": 
-    item.addIngrediants( product["ingredients"] )
-
-item.toString()
-
-
+    return item
