@@ -1,9 +1,9 @@
-import geopy.distance 
-import requests 
-import os 
-import pickle 
+import geopy.distance
+import requests
+import os
+import pickle
 
-#for google cloud platform 
+#for google cloud platform
 APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 
 
@@ -17,19 +17,19 @@ def calcDistance( lat1, lon1, lat2, lon2):
 def geocode( addressStr):
     url = "https://maps.googleapis.com/maps/api/geocode/json"
     parameters = {"address": addressStr, "key":APIkey }
-    
-    response = requests.get(url, params=parameters, timeout = 5) 
-  
-    try: 
-        json = response.json() 
+
+    response = requests.get(url, params=parameters, timeout = 5)
+
+    try:
+        json = response.json()
         if response.status_code != 200:
             print("Was not able to parse json object from API response. Response code = {}. UPC is {}".format(response.status_code, UPC))
-            exit(1) 
+            exit(1)
         else:
-            return json  
-    except ValueError: 
+            return json
+    except ValueError:
         print("Was not able to parse json object from API response. Response code = {} UPC = {}".format(response.status_code, UPC))
-        exit(1) 
+        exit(1)
 
 
 #use for mapping a list of addresses to a list of tuple coords
@@ -39,14 +39,14 @@ def addressToGeo( lstOfAddresses ):
     for x in lstOfAddresses:
         #print( "Address is {}".format(x))
 
-        #get the lat and long from the json 
+        #get the lat and long from the json
         response = geocode(x)
         location = response["results"][0]["geometry"]["location"]
-        coords   = (location["lat"], location["lng"]) 
-        result.append( coords ) 
+        coords   = (location["lat"], location["lng"])
+        result.append( coords )
 
         return result
-       
+
 
 def printDictionary( dictonary ):
     for k,v in dictonary.items():
@@ -54,9 +54,9 @@ def printDictionary( dictonary ):
         for item in v:
             print(item)
 
- 
+
 # st. paul = 44.9537 93.0900
-#print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301) 
+#print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301)
 
 
 
@@ -71,42 +71,42 @@ def getDistance( mfName, userLat, userLng ):
 
             }
 
-    #HTML5 will default to 0,0 if the user declines. 
+    #HTML5 will default to 0,0 if the user declines.
     if userLat == 0 and userLng == 0:
         print("User did not provide their location" )
         return -1;
 
     #if the addresses file already exitst then open for appending
-    #otherwise create the file and write the addresses. 
+    #otherwise create the file and write the addresses.
     if( os.path.isfile( "./addresses.pickle" ) ):
         addresses = open( "./addresses.pickle", "rb")
 
-        try: 
+        try:
             #load the dict of gpucords
             manufacturers = pickle.load( addresses )
-        except EOFError: 
+        except EOFError:
             os.remove("addresses.pickle")
             print("was not able to load file of locations. Run the server again to regenerate")
-            addresses.close() 
+            addresses.close()
             exit(1)
-        
+
         addresses.close()
     else:
-        addresses = open( "./addresses.pickle", "wb") 
-        
+        addresses = open( "./addresses.pickle", "wb")
+
         print("Converting the addresses to geolocations....")
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.items() ))
 
-        #save the geocode  
+        #save the geocode
         pickle.dump( geolocations, addresses)
 
         addresses.close()
-        manufacturers = geolocations 
+        manufacturers = geolocations
 
     #get the closest manufactor location
     #actually just get the first item in the list
     origin = manufacturers[mfName][0]
-    
+
     return abs(calcDistance( userLat, userLng, origin[0], origin[1] ) )
 
 
@@ -117,12 +117,9 @@ def c02calc( mfName, weight, userLat, userLng ):
 
     distance = getDistance( mfName, userLat, userLng)
 
-    #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo 
+    #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo
     airEmision = 500 # 500g * weight in tons * km
     gramsPerTon = 907185
 
-    emisions = airEmision * ( weight / gramsPerTon ) * distance 
-    return emisions # returns the total amount of co2 in grams 
-
-
-
+    emisions = airEmision * ( weight / gramsPerTon ) * distance
+    return emisions # returns the total amount of co2 in grams

@@ -15,6 +15,7 @@ from PIL import Image
 import imageio
 import upcReader
 import geoloc
+import mapsearcher
 
 port = os.environ.get('PORT')
 if (port==None):
@@ -109,12 +110,22 @@ class myHandler(BaseHTTPRequestHandler):
                             if(item.manufacturer!=""):
                                 self.wfile.write(("<li>Manufacturer: "+item.manufacturer+"</li>").encode())
 
+
                             userLat = form['latitude'].value
                             userLng = form['longitude'].value
-                            
-                            co2Grams = geoloc.c02calc( item.manufacturer, item.weight, userLat, userLng)  
-                            self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
-                            self.wfile.write("</div></body></html>".encode())
+
+                            mapsearch = (mapsearcher.findLocalProduct(item.name,userLat,userLng))
+                            if mapsearch != "":
+                                self.wfile.write(("<li>Check out: "+mapsearch+"</li>").encode())
+
+                            if (item.weight == ""):
+                                weight = 0
+                            else:
+                                weight = item.weight
+
+                            #co2Grams = geoloc.c02calc( item.manufacturer, weight, userLat, userLng)
+                            #self.wfile.write(("<li>Grams of CO2: " +str(co2Grams)+"g</li>").encode())
+                            #self.wfile.write("</div></body></html>".encode())
 
 
             if not hasResult:
