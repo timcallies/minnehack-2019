@@ -1,6 +1,4 @@
-import sys
 import requests 
-import string
 
 APIkey = "eri3nucrv4m3sv50imvc9yyfy40h53"
 
