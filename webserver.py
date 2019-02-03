@@ -36,6 +36,9 @@ class myHandler(BaseHTTPRequestHandler):
             if self.path.endswith(".html"):
                 mimetype='text/html'
                 sendReply=True
+            if self.path.endswith(".css"):
+                mimetype='text/css'
+                sendReply=True
             if self.path.endswith(".js"):
                 mimetype='application/javascript'
                 sendReply=True
