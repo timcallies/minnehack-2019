@@ -4,20 +4,27 @@
         @import url("/style.css");
     </style>
     <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body>
-        <h1>Website Name</h1>
-        <video autoplay onclick="captureImage()"></video>
+        <div id="main">
+            <h1>Website Name</h1>
+            <video autoplay onclick="captureImage()"></video>
 
-        <form id="imageForm" method="post" action="submit">
-          <input id="inp_img" name="img" type="hidden" value="">
-        </form>
+            <form id="imageForm" method="post" action="submit">
+              <input id="inp_img" name="img" type="hidden" value="">
+            </form>
+        </div>
 
         <canvas style="display:none;"></canvas>
-
-        <script src="/scripts/camera.js"></script>
     </body>
 
+    <div id="scan">
+        Scan a barcode to see the sustainability of the product.
+    </div>
+
+    <script src="/scripts/camera.js"></script>
 
 </html>
