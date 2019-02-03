@@ -12,7 +12,9 @@ import base64
 from PIL import Image
 import imageio
 
-PORT = os.environ.get('PORT')
+port = os.environ.get('PORT')
+if (port==None):
+    port=3000
 
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
@@ -21,6 +23,7 @@ def change_contrast(img, level):
     return img.point(contrast)
 
 class myHandler(BaseHTTPRequestHandler):
+
     def do_GET(self):
         if self.path=="/":
             self.path="html/home.html"
@@ -85,8 +88,8 @@ class myHandler(BaseHTTPRequestHandler):
 
 try:
     #Create a server
-    server = HTTPServer(('',PORT),myHandler)
-    print ('Server open on port ', PORT)
+    server = HTTPServer(('',port),myHandler)
+    print ('Server open on port ', port)
 
     server.serve_forever()
 
