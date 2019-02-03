@@ -122,8 +122,11 @@ class myHandler(BaseHTTPRequestHandler):
 
                             co2Grams = geoloc.c02calc( item.manufacturer, weight, userLat, userLng)
                             self.wfile.write(("<li>Grams of CO2: " +str(co2Grams)+"g</li>").encode())
-                            self.wfile.write("</div></body></html>".encode())
 
+
+                            distance = geoloc.getDistance(item.manufacturer,  userLat, userLng) 
+                            self.wfile.write(("<li>Distance from origin: " +str(distance)+"km</li>").encode())
+                            self.wfile.write("</div></body></html>".encode())
 
             if not hasResult:
                 self.send_response(200)
