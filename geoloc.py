@@ -103,8 +103,8 @@ def getDistance( mfName, userLat, userLng ):
     return calcDistance( userLat, userLng, origin[0], origin[1] ) 
 
 
-distance = getDistance( "dole", 44.9537, 93.0900 )
-print("Distance from Dole is: %dkm" % distance)
+#distance = getDistance( "dole", 44.9537, 93.0900 )
+#print("Distance from Dole is: %dkm" % distance)
 
 
 
