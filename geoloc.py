@@ -67,6 +67,8 @@ def getDistance( mfName, userLat, userLng ):
     manufacturers = { 'Ferolito Vultaggio & Sons' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
             "driscoll's" : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
             'dole' : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
+            'hunts' : ['554+S+Yosemite+Ave,+Oakdale,+CA+95361'],
+
             }
 
     #HTML5 will default to 0,0 if the user declines.
