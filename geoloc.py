@@ -69,7 +69,7 @@ def getDistance( mfName, userLat, userLng ):
     #HTML5 will default to 0,0 if the user declines. 
     if userLat == 0 and userLng == 0:
         print("User did not provide their location" )
-        exit(1)
+        return -1;
 
     #if the addresses file already exitst then open for appending
     #otherwise create the file and write the addresses. 
