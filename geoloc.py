@@ -56,7 +56,13 @@ def printDictionary( dictonary ):
 
 
 # st. paul = 44.9537 93.0900
+<<<<<<< HEAD
 #print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301)
+=======
+#print "%d" % calcDistance( 44.9537, 93.0900, 44.9591, 89.6301) 
+
+
+>>>>>>> d7cca6172a7a342a8c9015223e23ac3e4077ebe0
 
 
 # mf = manufacturer name
@@ -77,14 +83,25 @@ def getDistance( mfName, userLat, userLng ):
     if( os.path.isfile( "./addresses.pickle" ) ):
         addresses = open( "./addresses.pickle", "rb")
 
+<<<<<<< HEAD
         #load the dict of gpucords
         manufacturers = pickle.load( addresses )
+=======
+        try: 
+            #load the dict of gpucords
+            manufacturers = pickle.load( addresses )
+        except EOFError: 
+            os.remove("addresses.pickle")
+            print("was not able to load file of locations. Run the server again to regenerate")
+            addresses.close() 
+            exit(1)
+        
+>>>>>>> d7cca6172a7a342a8c9015223e23ac3e4077ebe0
         addresses.close()
     else:
         addresses = open( "./addresses.pickle", "wb")
 
         print("Converting the addresses to geolocations....")
-        #convert addresses to geocode
         geolocations = dict(map( lambda kv: ( kv[0], addressToGeo(kv[1]) ) , manufacturers.items() ))
 
         #save the geocode
@@ -102,15 +119,30 @@ def getDistance( mfName, userLat, userLng ):
 
 def c02calc( mfName, weight, userLat, userLng ):
     #default to a small item of 10 grams if no weight is provided.
+<<<<<<< HEAD
     if weight == 0: 
+=======
+    if weight == 0:
+>>>>>>> d7cca6172a7a342a8c9015223e23ac3e4077ebe0
         weight = 10
-
 
     distance = getDistance( mfName, userLat, userLng)
 
+<<<<<<< HEAD
     #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo
     airEmmision = 500 # 500g * weight in tons * km
     gramsPerTon = 907185
 
     emmisions = airEmmision * ( weight / gramsPerTon ) * distance
     return emmisions # returns the total amount of co2 in grams
+=======
+    #average cargo plane average emissions per metric ton per km Source Lufthansa Air cargo 
+    airEmision = 500 # 500g * weight in tons * km
+    gramsPerTon = 907185
+
+    emisions = airEmision * ( weight / gramsPerTon ) * distance 
+    return emisions # returns the total amount of co2 in grams 
+
+
+
+>>>>>>> d7cca6172a7a342a8c9015223e23ac3e4077ebe0

@@ -7,6 +7,7 @@ from os import curdir, sep
 import os
 import cgi
 import numpy
+import math
 import zbar
 import zbar.misc
 import base64
@@ -112,6 +113,7 @@ class myHandler(BaseHTTPRequestHandler):
 
                             userLat = form['latitude'].value
                             userLng = form['longitude'].value
+<<<<<<< HEAD
 
                             mapsearch = (mapsearcher.findLocalProduct(item.name,userLat,userLng))
                             if mapsearch != "":
@@ -125,6 +127,12 @@ class myHandler(BaseHTTPRequestHandler):
                             #co2Grams = geoloc.c02calc( item.manufacturer, weight, userLat, userLng)
                             #self.wfile.write(("<li>Grams of CO2: " +str(co2Grams)+"g</li>").encode())
                             #self.wfile.write("</div></body></html>".encode())
+=======
+                            
+                            co2Grams = geoloc.c02calc( item.manufacturer, item.weight, userLat, userLng)  
+                            self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
+                            self.wfile.write("</div></body></html>".encode())
+>>>>>>> d7cca6172a7a342a8c9015223e23ac3e4077ebe0
 
 
             if not hasResult:
