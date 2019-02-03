@@ -27,6 +27,7 @@ class produceItem:
         self.manufacturer = manufacturer.lower()
 
         #possible null values
+        self.weight = ""
         self.nutrition = []
         self.ingrediants = []
 
@@ -36,6 +37,9 @@ class produceItem:
 
     def addIngrediants( self, ingrediants ):
         self.ingrediants = ingrediants.lower().split(", ")
+
+    def addWeight(self, weight):
+        self.weight = weight.lower()
 
     def toString(self):
         print ("Name: {}\n\t UPC: {}\n\t Brand: {} \n\t Manufacturer: {}\n".format(self.name, self.upc, self.brand, self.manufacturer) )
@@ -84,5 +88,8 @@ def newProduce( UPC ):
 
     if product["ingredients"] != "":
         item.addIngrediants( product["ingredients"] )
+
+    if product["weight"] != "":
+        item.addWeight( product["weight"] )
 
     return item

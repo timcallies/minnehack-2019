@@ -109,11 +109,14 @@ class myHandler(BaseHTTPRequestHandler):
 
                             userLat = form['latitude'].value
                             userLng = form['longitude'].value
-                            distance = geoloc.getDistance(item.manufacturer, userLat, userLng)
-                            if(distance>0):
-                                print (distance)
-                                co2Grams = 115*distance
-                                self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
+                           
+                           if item.weight == "":
+                                weight = 0
+                            else:
+                                weight = item.weight
+                            
+                            co2Grams = geoloc.c02calc( item.manufacturer, weight, userLat, userLng)  
+                            self.wfile.write(("<li>Grams of CO2:" +str(co2Grams)+"</li>").encode())
                             self.wfile.write("</div></body></html>".encode())
                             
 
