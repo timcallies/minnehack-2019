@@ -1,11 +1,44 @@
 import sys
-import requests
-import json 
+import requests 
+import string
 
 APIkey = "jcgx5oyxczp630vm6vu9isb7vfar3z"
 
 UPC = sys.argv[1] 
-print "UPC is %s" %  UPC
+
+class produceItem:
+    def __init__(self, name, upc, brand, manufacturer):
+        self.name = name.lower()
+        self.upc = upc.lower()
+        self.brand = brand.lower()
+        self.manufacturer = manufacturer.lower()
+        
+        #possible null values 
+        self.nutrition = []
+        self.ingrediants = [] 
+
+    def addNutrition( self, nutrition ):
+        #do any necassary string formating 
+        nutrition = nutrition.lower()
+        self.nutrition = nutrition.split(", ")
+
+    def addIngrediants( self, ingrediants ): 
+        self.ingrediants = ingrediants.lower().split(", ")
+
+    def toString(self):
+        print "Name: %s\n\t UPC: %s\n\t Brand: %s \n\t Manufacturer: %s\n" % (self.name, self.upc, self.brand, self.manufacturer)
+        if len( self.nutrition ) != 0:
+            print "\tNutrition:"
+            for x in range( len(self.nutrition) ):
+                print "\n\t\t %s" % self.nutrition[x] 
+        
+        if len(self.ingrediants) != 0: 
+                print "\n\tIngrediants:"
+                for x in range( len(self.ingrediants) ):
+                    print "\n\t\t %s" % self.ingrediants[x]
+
+
+
 
 #function that takes the UPC code and returns the result of the request. 
 def createRequest( upc ):
@@ -16,9 +49,29 @@ def createRequest( upc ):
 
 response = createRequest( UPC )
 
-print "Status code is %d" % response.status_code 
+# Error check JSON 
+try:
+    json = response.json()
+    if response.status_code != 200: 
+        print "Was not able to parse json object from API response. Response code = %d. UPC is %s" % (response.status_code, UPC)
+        exit(1) 
 
-json = response.json()
-print "Brand is %s" % json["products"][0]["brand"]
+except ValueError:
+    print "Was not able to parse json object from API response. Response code = %d UPC = %s" % (response.status_code, UPC)
+    exit(1) 
+
+
+#print "response is %s\n" % json
+
+
+product = json["products"][0]
+item = produceItem( product["product_name"], product["barcode_number"], product["brand"], product["manufacturer"])
+if product["nutrition_facts"] != "": 
+    item.addNutrition( product["nutrition_facts"] )
+
+if product["ingredients"] != "": 
+    item.addIngrediants( product["ingrediants"] )
+
+item.toString()
 
 
