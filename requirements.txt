@@ -1,0 +1,4 @@
+zbar-py
+imageio
+pillow
+pip
