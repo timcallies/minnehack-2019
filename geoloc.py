@@ -6,9 +6,9 @@ import pickle
 #for google cloud platform 
 APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
 
-manufacturers = { 'arizona' : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
-                  'driscolls' : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
-                  'dole' : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
+manufacturers = { "Ferolito Vultaggio & Sons" : ['One Arizona Plaza, 60 Crossways Park Drive, Suite 400, Woodbury, NY 11797'],
+                "driscoll's" : ['S E St, Santa Maria, CA 93455', '12880 US-92, Dover, FL 33527'],
+                "dole" : ['1116 Whitmore Ave, Wahiawa, HI 96786', 'San Jose, Costa Rice', 'Medellin, Colombia'],
                   }
 
 
