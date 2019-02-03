@@ -12,7 +12,7 @@ import base64
 from PIL import Image
 import imageio
 
-PORT = 3000
+PORT = os.environ.get('PORT')
 
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
