@@ -92,4 +92,7 @@ def newProduce( UPC ):
     if product["weight"] != "": 
         item.addWeight( product["weight"] )
 
+    if product["manufacturer"] == "" and product["brand"] != "":
+        item.manufacturer = product["brand"].lower()
+
     return item

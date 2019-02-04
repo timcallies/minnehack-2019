@@ -4,7 +4,7 @@ import os
 import pickle
 
 #for google cloud platform
-APIkey = "AIzaSyBZ_aIJmoMpqTvqfVVcwkJ11lK8QYLA35M"
+APIkey = ""
 
 
 def calcDistance( lat1, lon1, lat2, lon2):

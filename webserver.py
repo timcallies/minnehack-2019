@@ -130,10 +130,10 @@ class myHandler(BaseHTTPRequestHandler):
 
                             if co2Grams > 20:
                                 self.wfile.write(("<li>Your food choice produces a very high amount of CO2 emissions</li>").encode())
-                            else if co2Grams > 10 and co2Grams <= 20:
+                            elif co2Grams > 10 and co2Grams <= 20:
                                 self.wfile.write(("<li>Your food choice produces a moderate amount of CO2 emissions</li>").encode())
                                 self.wfile.write(("<li>Not bad, but you could do better!</li>").encode())
-                            else if co2Grams <= 10:
+                            elif co2Grams <= 10:
                                 self.wfile.write(("<li>Your food choice produces a low amount of CO2 emissions</li>").encode())
                                 self.wfile.write(("<li>Well done, you're saving the planet!!</li>").encode())
                                 
